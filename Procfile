@@ -1,1 +1,1 @@
-web gunicorn topblog.wsgi:application
+web gunicorn topblog.wsgi:app
