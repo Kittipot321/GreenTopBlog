@@ -25,7 +25,7 @@ SECRET_KEY = 'w5+&g$t@m90gbt1unwu@h(g5+*%&_#_-92kk2o7=*r-t6ta7!8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['kittipotblog.herokuapp.com']
 
 
 # Application definition
