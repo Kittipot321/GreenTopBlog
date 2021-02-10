@@ -1,1 +1,1 @@
-web: gunicorn topblog.wsgi
+web: gunicorn kittipotblog.wsgi
