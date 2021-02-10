@@ -1,1 +1,1 @@
-web: gunicorn kittipotblog.wsgi --log-file -
+web: gunicorn myblog.wsgi --log-file -
