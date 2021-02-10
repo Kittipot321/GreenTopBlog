@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Register</h3>
+<hr color='red'>
+    <form method="POST">
+    {% csrf_token %}
+    <div class="row">
+    {{form}}
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="submit" class='green btn' type="submit" value='Sign Up'>
+        </div>
+    </div>
+    </form>
+{% endblock %}

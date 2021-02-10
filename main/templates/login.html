@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <br>
+    <h3>Log In</h3>
+    <form method="POST" action="{% url 'logins' %}">
+    {% csrf_token %}
+    <div class='row s12'>
+        <div class="input-field col s10">
+          <input id="username" name='username' type="text">
+          <label for="username">Username</label>
+        </div>
+        <div class="input-field col s10">
+          <input id="password" name='password' type="password">
+          <label for="password">Password</label>
+        </div>
+    </div>
+    <div class='row s12'>
+        <div class='input-field col s1'>
+            <input type='submit' class="waves-light blue btn" value='Log In'>
+        </div>
+        <div class='input-field col s2'>
+            <a class="waves-effect waves-light pink btn" href="{% url 'index' %}">Guest Login</a>
+        </div>
+    </div>
+    </form>
+{% endblock %}

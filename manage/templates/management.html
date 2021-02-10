@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h3>Management</h3>
+  <div class='row s12'>
+  <div class='col s12'>
+    <table id="myTable" class="display" style="width: 100%;">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for o in list %}
+          <tr>
+            <td>{{o.id}}</td>
+            <td><a href="{% url 'delete' tweet_id=o.id %}">Delete</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+<script>
+   $(document).ready(function() {
+      $('#myTable').DataTable();
+    });
+</script>
+{% endblock %}

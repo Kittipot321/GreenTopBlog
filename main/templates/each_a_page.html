@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+    <a class="waves-effect waves-light light btn" href="{% url 'index' %}">Back</a>
+    {% for o in db %}
+        <h1>{{o.title}}</h1>
+        <p>{{o.date}}</p>
+        <hr>
+        <p>{{o.content}}</p>
+    {% endfor %}
+    <h4>Comment</h4>
+    {% if user.is_authenticated %}
+    <form method="POST">
+    {% csrf_token %}
+    <div class='row'>
+        <div class='col l10'>
+            {{form}}
+        </div>
+        <div class='col l2'>
+        <br>
+            <input type='submit' value='Send'>
+        </div>
+    </div>
+    </form>
+    {% else %}
+    <p>Please Log in or Register!</p>
+    {% endif %}
+    {% for c in comment %}
+    <div class="card light-blue darken-1">
+        <div class="card-content white-text">
+          <p>{{c.user.username}} | {{c.create_time| timesince}} ago</p>
+          <h5>{{c.content}}</h5>
+        </div>
+      </div>
+    {% endfor %}
+{% endblock %}
