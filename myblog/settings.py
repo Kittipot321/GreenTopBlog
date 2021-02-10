@@ -25,7 +25,7 @@ SECRET_KEY = 'w5+&g$t@m90gbt1unwu@h(g5+*%&_#_-92kk2o7=*r-t6ta7!8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['kittipotblog.herokuapp.com']
+ALLOWED_HOSTS = ['kittipotblog.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -77,11 +77,14 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'df3773b5fu2n8k',
+        'HOST': 'ec2-54-164-241-193.compute-1.amazonaws.com',
+        'PORT' : 5432,
+        'USER':'ctktczxhemmdxn',
+        'PASSWORD':'f3d91525a1922b6ea91d63a3038cd6cc585f479a663cd92b2c7391066d999980'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
