@@ -1,1 +1,1 @@
-web gunicorn topblog.wsgi:application --log-file
+web gunicorn topblog.wsgi:application --log-file-
