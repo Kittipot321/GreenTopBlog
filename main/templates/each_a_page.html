@@ -6,7 +6,7 @@
         <h1>{{o.title}}</h1>
         <p>{{o.date}}</p>
         <hr>
-        <p>{{o.content}}</p>
+        <p>{{o.content|safe}}</p>
     {% endfor %}
     <h4>Comment</h4>
     {% if user.is_authenticated %}

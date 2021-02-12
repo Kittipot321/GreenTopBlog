@@ -17,7 +17,8 @@
     <div class="row">
     <form class="col s12" method="POST" action="{% url 'addpage' %}">
     {% csrf_token %}
-      {{form}}
+      {{form.media}}
+      {{form.as_p}}
     <div class='input-field col s1'>
         <input type='submit' class="waves-light blue btn" value='Post'>
     </div>
