@@ -14,14 +14,14 @@
     </div>
   <div class="row">
     {% for o in db %}
-    <div class="col l6">
+    <div class="col l12">
+    <a href="{% url 'each_a_page' news_id=o.id %}">
       <div class="card light-blue darken-1">
         <div class="card-content white-text">
           <span class="card-title">{{o.title}}</span>
-          <p>{{o.content|stringformat:".100s"}}...</p><br>
-          <a class="waves-effect waves-light green btn" href="{% url 'each_a_page' news_id=o.id %}">Read More....</a>
         </div>
       </div>
+    </a>
     </div>
   {% empty %}
   <p class='center'>Not Found!</p>

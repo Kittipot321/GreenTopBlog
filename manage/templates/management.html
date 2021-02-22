@@ -6,15 +6,16 @@
     <table id="myTable" class="display" style="width: 100%;">
       <thead>
         <tr>
-          <th>id</th>
-          <th></th>
+          <th>title</th>
+          <th colspan="2">Action</th>
         </tr>
       </thead>
       <tbody>
         {% for o in list %}
           <tr>
-            <td>{{o.id}}</td>
+            <td>{{o.title}}</td>
             <td><a href="{% url 'delete' tweet_id=o.id %}">Delete</a></td>
+            <td><a href="#">Update</a></td>
           </tr>
         {% endfor %}
       </tbody>
