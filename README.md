@@ -28,12 +28,12 @@ Database : sqlite3
 </p>
 ## How to Run?
 1. สร้างและรัน virutalenv
+
 ```
 python -m venv env
-```
-```
 env\Script\activate
 ```
+
 2. ติดตั้ง requirements.txt
 ```
 pip install -r requirements.txt
@@ -44,6 +44,7 @@ pip install -r requirements.txt
 python manage.py makemigrations (ถ้ามีการเปลี่ยนแปลง)
 python manage.py migrate
 ```
+
 4. รัน django :)
 ```
 python manage.py runserver
