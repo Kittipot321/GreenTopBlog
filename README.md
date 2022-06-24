@@ -10,7 +10,7 @@
 2. User
 3. Guest
 
-## Database Schema
+## Database
 Database : sqlite3
 
 ## Preview
@@ -30,9 +30,10 @@ Database : sqlite3
 1. สร้างและรัน virutalenv
 ```
 python -m venv env
+```
+```
 env\Script\activate
 ```
-
 2. ติดตั้ง requirements.txt
 ```
 pip install -r requirements.txt
