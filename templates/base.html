@@ -10,7 +10,7 @@
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <title>GreenTopBlog</title>
+  <title>{{title}}</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -22,7 +22,7 @@
   <div class="navbar-fixed">
     <nav class="green" role="navigation">
       <div class="nav-wrapper container">
-        <a id="logo-container" href="{% url 'index' %}" class="brand-logo">GreenTopBlog</a>
+        <a id="logo-container" href="{% url 'index' %}" class="brand-logo">GreenBlog</a>
         <ul class="right hide-on-med-and-down">
           {% if user.is_authenticated %}
           <li><a href="{% url 'add' %}"><i class="material-icons left">add</i>Add Post</a></li>

@@ -1,10 +1,7 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
 from main.models import ListTweet,Comment
-from django.contrib.auth.decorators import login_required
-from manage.forms import AddTweetForm,CommentForm
+from manage.forms import CommentForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from datetime import datetime
 # Create your views here.
 def index(request):
     mydb = ListTweet.objects.filter(status=True).order_by('-id')
@@ -13,16 +10,15 @@ def index(request):
     try:
         post_list = paginator.page(page)
     except PageNotAnInteger:
-            # If page is not an integer deliver the first page
         post_list = paginator.page(1)
     except EmptyPage:
-        # If page is out of range deliver last page of results
         post_list = paginator.page(paginator.num_pages)
     search_txt = request.GET.get('search','')
     if search_txt:
-        mydb = mydb.filter(title__contains=search_txt)
+        post_list = mydb.filter(title__contains=search_txt)
     context={
-        'db':post_list
+        'db':post_list,
+        'title':"GreenBlog"
     }
     return render(request, "index.html",context=context)
 
@@ -42,6 +38,7 @@ def each_a_page(request,news_id):
     context={
         'db':mydb,
         'form':form,
-        'comment':comment
+        'comment':comment,
+        'title':mydb[0].title
     }
     return render(request, "each_a_page.html", context=context)

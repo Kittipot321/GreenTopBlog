@@ -9,6 +9,8 @@ class ListTweet(models.Model):
     status = models.BooleanField(default=True)
     create_date = models.DateTimeField(auto_now=False, null=True)
     updated_date = models.DateTimeField(auto_now=True,null=False)
+    def total_comment(self):
+        return self.comment_set.count()
     def __str__(self):
         return self.title
 class Comment(models.Model):

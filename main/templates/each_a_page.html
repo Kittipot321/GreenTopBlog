@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
+{% block title %}{{title}}{% endblock %}
 {% block content %}
     {% for o in db %}
         <h1>{{o.title}}</h1>
         <p><i class="material-icons text-size">person</i> {{o.user}} | <i class="material-icons text-size">access_time</i> {{o.create_date|date:"d b Y H:i"}}</p>
         <hr>
         <p>{{o.content|safe}}</p>
-    {% endfor %}
     <p class="center-align">
         <a class="waves-effect waves-light light btn" href="{% url 'index' %}">Go to Home</a>
     </p>
-    <h4>Comment</h4>
+    {% if o.total_comment <= 1 %}
+        <h4>{{o.total_comment}} Comment</h4>
+    {% else %}
+        <h4>{{o.total_comment}} Comments</h4>
+    {% endif %}
+    {% endfor %}
     {% if user.is_authenticated %}
     <form method="POST">
     {% csrf_token %}
@@ -36,7 +41,7 @@
         </div>
         {% if c.user.id == request.user.id or request.user.is_superuser %}
         <div class="card-action">
-            <a href="{% url 'delete_cm' comment_id=c.id %}" class="white-text"><i class="material-icons">delete</i></a>
+            <a href="{% url 'delete_cm' comment_id=c.id %}" onclick="return confirm('Are you sure to delete this comment?')" class="white-text"><i class="material-icons">delete</i></a>
         </div>
         {% else %}
         {% endif %}

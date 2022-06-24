@@ -28,7 +28,7 @@
             <tr>
               <td><a href="{% url 'each_a_page' news_id=o.id %}">{{o.title}}</a></td>
               <td class="center">
-                <span>{{o.number_of_comment}}</span>
+                <span>{{o.total_comment}}</span>
               </td>
               <td class="center">
                 <a href="{% url 'editstatus' tweet_id=o.id %}">
@@ -41,7 +41,7 @@
               </td>
               <td class="center">
                 <a href="{% url 'edit' tweet_id=o.id %}"><i class="material-icons">loop</i></a>
-                <a href="{% url 'delete' tweet_id=o.id %}"><i class="material-icons">delete</i></a>
+                <a href="{% url 'delete' tweet_id=o.id %}" onclick="return confirm('Are you sure to delete this post?')"><i class="material-icons">delete</i></a>
               </td>
             </tr>
             {% empty %}
@@ -53,9 +53,17 @@
       </table>
     </div>
   </div>
+  {% if list.has_other_pages %}
+    <ul class="pagination center">
+      {% if list.has_previous %}
+      <li><a href="?page={{ list.previous_page_number }}" class="waves-effect"><i class="material-icons left">chevron_left</i>PREV</a></li>
+      {% endif %}
+      {% if list.has_next %}
+      <li><a href="?page={{ list.next_page_number }}" class="waves-effect"><i class="material-icons right">chevron_right</i>NEXT</a></li>
+    {% endif %}
+    </ul>
+  {% endif %}
 <script>
-   $(document).ready(function() {
-      $('#myTable').DataTable();
-    });
+   
 </script>
 {% endblock %}

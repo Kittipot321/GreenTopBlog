@@ -7,7 +7,7 @@
           <label for="search">Search</label>
         </div>
         <div class='input-field col s2'>
-            <input type='submit' class="waves-light blue btn" value='Search'>
+          <button class="waves-light blue btn" type="submit"><i class="material-icons">search</i></button>
         </div>
       </form>
     </div>
@@ -42,10 +42,10 @@
   {% if db.has_other_pages %}
     <ul class="pagination center">
       {% if db.has_previous %}
-      <li><a href="?page={{ db.previous_page_number }}" class="waves-effect"><i class="material-icons">chevron_left</i></a></li>
+      <li><a href="?page={{ db.previous_page_number }}" class="waves-effect"><i class="material-icons left">chevron_left</i>PREV</a></li>
       {% endif %}
       {% if db.has_next %}
-      <li><a href="?page={{ db.next_page_number }}" class="waves-effect"><i class="material-icons">chevron_right</i></a></li>
+      <li><a href="?page={{ db.next_page_number }}" class="waves-effect"><i class="material-icons right">chevron_right</i>NEXT</a></li>
     {% endif %}
     </ul>
   {% endif %}

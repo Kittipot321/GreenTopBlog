@@ -1,12 +1,11 @@
 from tokenize import Comment
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout,authenticate,login
 from django.contrib.auth.decorators import login_required
 from .forms import EditTweetForm, UserRegisterForm,AddTweetForm
 from datetime import datetime
 from main.models import ListTweet,Comment
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Create your views here.
 def register(request):
     if request.method == "POST":
@@ -18,12 +17,16 @@ def register(request):
     else:
         reg_form = UserRegisterForm()
     context={
-        'form':reg_form
+        'form':reg_form,
+        'title':"Register | GreenBlog"
     }
     return render(request, 'register.html',context=context)
 
 def my_login(request):
-    return render(request, 'login.html')
+    context={
+        'title':"Login | GreenBlog"
+    }
+    return render(request, 'login.html',context=context)
 
 def my_logins(request):
     username = request.POST['username']
@@ -43,18 +46,24 @@ def my_logout(request):
 def managementroom(request):
     # Management Comment Page if blogger is see all comments but end-user is see you comment.
     list = ListTweet.objects.all().order_by('-id')
+    paginator = Paginator(list, 10)
+    page = request.GET.get('page')
     if request.user.is_superuser:
         list = list
     else:
         list = ListTweet.objects.filter(user=request.user)
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+        post_list = paginator.page(1)
+    except EmptyPage:
+        post_list = paginator.page(paginator.num_pages)
     search_txt = request.GET.get('search','')
     if search_txt:
-        list = list.filter(title__contains=search_txt)
-    for onelist in list:
-        # Counting the number of comments on each post and then saving it to the number_of_comment attribute of the post.
-        onelist.number_of_comment = onelist.comment_set.filter(post=onelist.id).count()
+        post_list = list.filter(title__contains=search_txt)
     context={
-        'list':list
+        'list':post_list,
+        'title':"Management Post"
     }
     return render(request, 'management.html',context=context)
 
@@ -72,7 +81,8 @@ def addtweet(request):
     else:
         form = AddTweetForm()
     context={
-        'form':form
+        'form':form,
+        'title':"Add Post | GreenBlog"
     }
     return render(request, 'addpage.html',context=context)
 
@@ -87,7 +97,8 @@ def edittweet(request,tweet_id):
         return redirect('main_manage')
     context={
         'form':form,
-        'edit_id':tweet_id
+        'edit_id':tweet_id,
+        'title':"Edit Post | GreenBlog"
     }
     return render(request, 'editpage.html',context=context)
 
