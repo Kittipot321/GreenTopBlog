@@ -2,25 +2,56 @@
 {% block content %}
   <h3>Management</h3>
   <div class='row s12'>
-  <div class='col s12'>
-    <table id="myTable" class="display" style="width: 100%;">
-      <thead>
-        <tr>
-          <th>title</th>
-          <th colspan="2">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for o in list %}
+      <form method="GET" action="{% url 'main_manage' %}">
+        <div class="input-field col s10">
+          <input id="search" name='search' type="text">
+          <label for="search">Search</label>
+        </div>
+        <div class='input-field col s2'>
+            <input type='submit' class="waves-light blue btn" value='Search'>
+        </div>
+      </form>
+    </div>
+  <div class='row s12'>
+    <div class='col s12'>
+      <table id="myTable" class="highlight" style="width: 100%;">
+        <thead>
           <tr>
-            <td>{{o.title}}</td>
-            <td><a href="{% url 'delete' tweet_id=o.id %}">Delete</a></td>
-            <td><a href="#">Update</a></td>
+            <th class="center">Title</th>
+            <th class="center">Comments</th>
+            <th class="center">Active?</th>
+            <th colspan="2" class="center">Action</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          {% for o in list %}
+            <tr>
+              <td><a href="{% url 'each_a_page' news_id=o.id %}">{{o.title}}</a></td>
+              <td class="center">
+                <span>{{o.number_of_comment}}</span>
+              </td>
+              <td class="center">
+                <a href="{% url 'editstatus' tweet_id=o.id %}">
+                  {% if o.status == True %}
+                    <i class="material-icons">check</i>
+                  {% else %}
+                    <i class="material-icons">close</i>
+                  {% endif %}
+                </a>
+              </td>
+              <td class="center">
+                <a href="{% url 'edit' tweet_id=o.id %}"><i class="material-icons">loop</i></a>
+                <a href="{% url 'delete' tweet_id=o.id %}"><i class="material-icons">delete</i></a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td class='center' colspan="4">Not Found!</p>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 <script>
    $(document).ready(function() {

@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<br>
-    <a class="waves-effect waves-light light btn" href="{% url 'index' %}">Back</a>
     {% for o in db %}
         <h1>{{o.title}}</h1>
-        <p>{{o.date}}</p>
+        <p><i class="material-icons text-size">person</i> {{o.user}} | <i class="material-icons text-size">access_time</i> {{o.create_date|date:"d b Y H:i"}}</p>
         <hr>
         <p>{{o.content|safe}}</p>
     {% endfor %}
+    <p class="center-align">
+        <a class="waves-effect waves-light light btn" href="{% url 'index' %}">Go to Home</a>
+    </p>
     <h4>Comment</h4>
     {% if user.is_authenticated %}
     <form method="POST">
@@ -18,7 +19,9 @@
         </div>
         <div class='col l2'>
         <br>
-            <input type='submit' value='Send'>
+        <button class="btn waves-effect waves-light green" type="submit" name="action">Send
+            <i class="material-icons right">send</i>
+        </button>
         </div>
     </div>
     </form>
@@ -31,6 +34,17 @@
           <p>{{c.user.username}} | {{c.create_time| timesince}} ago</p>
           <h5>{{c.content}}</h5>
         </div>
+        {% if c.user.id == request.user.id or request.user.is_superuser %}
+        <div class="card-action">
+            <a href="{% url 'delete_cm' comment_id=c.id %}" class="white-text"><i class="material-icons">delete</i></a>
+        </div>
+        {% else %}
+        {% endif %}
       </div>
     {% endfor %}
+<style>
+.text-size{
+  font-size: 16px;
+}
+</style>
 {% endblock %}

@@ -13,6 +13,11 @@ class AddTweetForm(forms.ModelForm):
     class Meta:
         model = ListTweet
         fields = ['title','content']
+class EditTweetForm(forms.ModelForm):
+    content = RichTextField(blank=True,null=True)
+    class Meta:
+        model = ListTweet
+        fields = ['title','content']
 class CommentForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea,label='Comment')
     class Meta:

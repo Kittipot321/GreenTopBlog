@@ -19,5 +19,9 @@ from main import urls
 from manage import urls,views
 urlpatterns = [
    path('', views.managementroom, name='main_manage'),
-   path('del/<int:tweet_id>', views.deletetweet, name='delete')
+   path('addpost/', views.addtweet, name='add'),
+   path('editpost/<int:tweet_id>', views.edittweet, name='edit'),
+   path('editpost/<int:tweet_id>/setstatus', views.editstatus, name='editstatus'),
+   path('deletepost/<int:tweet_id>', views.deletetweet, name='delete'),
+   path('deletecomment/<int:comment_id>', views.deletecomment, name='delete_cm'),
 ]

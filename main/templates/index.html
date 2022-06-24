@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    <br>
     <div class='row s12'>
       <form method="GET" action="{% url 'index' %}">
         <div class="input-field col s10">
@@ -13,18 +12,46 @@
       </form>
     </div>
   <div class="row">
-    {% for o in db %}
-    <div class="col l12">
-    <a href="{% url 'each_a_page' news_id=o.id %}">
-      <div class="card light-blue darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">{{o.title}}</span>
+    <div class="col l8">
+      {% for o in db %}
+        <div class="card">
+          <div class="card-content black-text">
+            <span class="card-title">{{o.title}}</span>
+            <p><i class="material-icons text-size">person</i> {{o.user}} | <i class="material-icons text-size">access_time</i> {{o.create_date|date:"d b Y H:i"}}</p>
+          </div>
+          <div class="card-action">
+            <a class="blue-text" href="{% url 'each_a_page' news_id=o.id %}">Read More</a>
+          </div>
+        </div>
+        {% empty %}
+        <p class='center'>Not Found!</p>
+      {% endfor %}
+    </div>
+    <div class="col l4">
+      <div class="card">
+        <div class="card-image">
+          <img src="static/greenblog.jpg">
+          <span class="card-title black-text">About Us</span>
+        </div>
+        <div class="card-content">
+          <p>ยินดีต้อนรับสู่เว็บบล็อกของเรา ซึ่งเกี่ยวกับข่าวสารและความรู้ในเรื่องของธรรมชาติและพลังงานสีเขียวสำหรับบุคคลทั่วไปที่สนใจเรื่องเกี่ยวกับการอนุรักษ์ทรัพยากรธรรมชาติ</p>
         </div>
       </div>
-    </a>
     </div>
-  {% empty %}
-  <p class='center'>Not Found!</p>
-{% endfor %}
-</div>
+  </div>
+  {% if db.has_other_pages %}
+    <ul class="pagination center">
+      {% if db.has_previous %}
+      <li><a href="?page={{ db.previous_page_number }}" class="waves-effect"><i class="material-icons">chevron_left</i></a></li>
+      {% endif %}
+      {% if db.has_next %}
+      <li><a href="?page={{ db.next_page_number }}" class="waves-effect"><i class="material-icons">chevron_right</i></a></li>
+    {% endif %}
+    </ul>
+  {% endif %}
+<style>
+.text-size{
+  font-size: 16px;
+}
+</style>
 {% endblock %}

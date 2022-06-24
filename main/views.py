@@ -3,15 +3,26 @@ from django.http import HttpResponse
 from main.models import ListTweet,Comment
 from django.contrib.auth.decorators import login_required
 from manage.forms import AddTweetForm,CommentForm
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from datetime import datetime
 # Create your views here.
 def index(request):
-    mydb = ListTweet.objects.all().order_by('-id')
+    mydb = ListTweet.objects.filter(status=True).order_by('-id')
+    paginator = Paginator(mydb, 4)
+    page = request.GET.get('page')
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+        post_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        post_list = paginator.page(paginator.num_pages)
     search_txt = request.GET.get('search','')
     if search_txt:
         mydb = mydb.filter(title__contains=search_txt)
     context={
-        'db':mydb
+        'db':post_list
     }
     return render(request, "index.html",context=context)
 
@@ -34,19 +45,3 @@ def each_a_page(request,news_id):
         'comment':comment
     }
     return render(request, "each_a_page.html", context=context)
-@login_required
-def addtweet(request):
-    if request.method == "POST":
-        form = AddTweetForm(request.POST)
-        if form.is_valid():
-            instance = form.save()
-            instance.user_id = request.user.id
-            instance.create_date = datetime.now()
-            instance.save()
-            return redirect('index')
-    else:
-        form = AddTweetForm()
-    context={
-        'form':form
-    }
-    return render(request, 'addpage.html',context=context)
