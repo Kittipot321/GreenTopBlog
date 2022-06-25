@@ -98,6 +98,7 @@ def edittweet(request,tweet_id):
     context={
         'form':form,
         'edit_id':tweet_id,
+        'last_update':instance.updated_date,
         'title':"Edit Post | GreenBlog"
     }
     return render(request, 'editpage.html',context=context)

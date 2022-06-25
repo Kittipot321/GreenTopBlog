@@ -2,6 +2,7 @@
 {% block content %}
     <h2>Edit Post</h2>
     <div class="row">
+      Last Update : {{last_update|date:"d b Y H:i"}}
       <form class="col s12" method="POST" action="{% url 'edit' tweet_id=edit_id %}">
         {% csrf_token %}
           {{form.media}}
