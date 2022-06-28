@@ -46,12 +46,14 @@ def my_logout(request):
 def managementroom(request):
     # Management Comment Page if blogger is see all comments but end-user is see you comment.
     list = ListTweet.objects.all().order_by('-id')
-    paginator = Paginator(list, 10)
-    page = request.GET.get('page')
+    
     if request.user.is_superuser:
         list = list
     else:
         list = ListTweet.objects.filter(user=request.user)
+
+    paginator = Paginator(list, 10)
+    page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
     except PageNotAnInteger:
