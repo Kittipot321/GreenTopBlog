@@ -22,7 +22,7 @@ Database : sqlite3
 <p align="center">
   ER Diagram
 </p>
-## Preview
+
 <p align="center">
   <img width="460" height="300" src="my_blog.png" style="border:1px black solid">
 </p>
