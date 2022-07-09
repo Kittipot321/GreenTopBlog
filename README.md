@@ -5,6 +5,10 @@
 
 โดย Project เป็นส่วนหนึ่งเพื่อใช้ในการนำเสนอผลงานเพื่อใช้สำหรับส่งโครงงานเพื่อรับใบประกาศนียบัตรในคอร์ส Django from Zero จากทาง BorntoDev
 
+## Technology
+1. Django
+2. Materialize CSS
+
 ## Role
 1. Blogger (Admin)
 2. User
@@ -12,7 +16,12 @@
 
 ## Database
 Database : sqlite3
-
+<p align="center">
+  <img width="460" height="300" src="Greenblog_DB.png" style="border:1px black solid">
+</p>
+<p align="center">
+  ER Diagram
+</p>
 ## Preview
 <p align="center">
   <img width="460" height="300" src="my_blog.png" style="border:1px black solid">
