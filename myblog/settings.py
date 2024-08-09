@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import dj_database_url
 from enum import auto
+from dotenv import load_dotenv
+load_dotenv()
 import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,10 +23,10 @@ MEDIA_URL = '/media/'
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w5+&g$t@m90gbt1unwu@h(g5+*%&_#_-92kk2o7=*r-t6ta7!8'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['kittipotblog.herokuapp.com','127.0.0.1']
 
@@ -85,7 +87,7 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 # }
 
 DATABASES = {
-    'default' : dj_database_url.config(default='postgresql://greenblog_db_user:q18fFsAIsxlEFOzaBhjrManTQmg78a64@dpg-cqqnip3qf0us7390j3ag-a.singapore-postgres.render.com/greenblog_db')
+    'default' : dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 # DATABASES = {
 #     'default': {
