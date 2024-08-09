@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import dj_database_url
 from enum import auto
 import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -83,16 +83,20 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'df3773b5fu2n8k',
-        'HOST': 'ec2-54-164-241-193.compute-1.amazonaws.com',
-        'PORT' : 5432,
-        'USER':'ctktczxhemmdxn',
-        'PASSWORD':'f3d91525a1922b6ea91d63a3038cd6cc585f479a663cd92b2c7391066d999980'
-    }
+    'default' : dj_database_url.config(default='postgresql://greenblog_db_user:q18fFsAIsxlEFOzaBhjrManTQmg78a64@dpg-cqqnip3qf0us7390j3ag-a.singapore-postgres.render.com/greenblog_db')
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'df3773b5fu2n8k',
+#         'HOST': 'ec2-54-164-241-193.compute-1.amazonaws.com',
+#         'PORT' : 5432,
+#         'USER':'ctktczxhemmdxn',
+#         'PASSWORD':'f3d91525a1922b6ea91d63a3038cd6cc585f479a663cd92b2c7391066d999980'
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -124,7 +128,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
